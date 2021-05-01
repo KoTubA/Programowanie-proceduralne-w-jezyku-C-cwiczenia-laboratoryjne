@@ -9,8 +9,6 @@ typedef struct node {
 Node *head = NULL;
 Node *tail = NULL;
 
-int size = 0;
-
 void printQueue() {
     Node *q = head;
 
