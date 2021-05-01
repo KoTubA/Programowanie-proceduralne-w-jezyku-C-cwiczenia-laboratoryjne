@@ -2,22 +2,23 @@
 #include<stdlib.h>
 
 typedef struct node {
-    int value;
+    char value;
     struct node *next;
 } Node;
 
+Node *head = NULL;
 Node *tail = NULL;
 
 int size = 0;
 
 void printQueue() {
-    Node *q = tail;
+    Node *q = head;
 
     printf("Zawartosc kolejki:\n");
 
     while(q != NULL)
     {
-        printf("%d ", q->value);
+        printf("%c ", q->value);
         q = q->next;
     }
     printf("\n");
@@ -25,49 +26,46 @@ void printQueue() {
 }
 
 void enqueue() {
-    int new_value;
-    printf("Podaj warosc wezla: ");
-    scanf("%d", &new_value);
+    char character;
+    printf("Podaj znak wezla: ");
+    scanf(" %c", &character);
 
+    Node *temp = (Node *) malloc(sizeof(Node));
+    temp->value = character;
+    temp->next = NULL;
 
-    Node *new_node = (Node *) malloc(sizeof(Node));
-    new_node->value = new_value;
-    new_node->next = tail;
-    tail = new_node;
-    size++;
+    if(head==NULL) {
+        head = temp;
+        tail = temp;
+    }
+    else {
+        if(head->next==NULL) head->next = temp;
+        tail->next=temp;
+        tail=temp;
+    }
 }
 
 int dequeue() {
-    int number;
+    char character;
 
-    if(size != 0)
+    if(head != NULL)
 	{
-	    Node *temp = tail;
-	    for(int i = 0; i < size - 2; i++)
-		{
-			temp = temp->next;
-		}
-        if(size==1) {
-            number = temp->value;
-            tail = NULL;
-        }
-        else {
-            number = temp->next->value;
-            free(temp->next);
-            temp->next = NULL;
-        }
-		size--;
+	    character = head->value;
+	    Node *temp = head->next;
+	    free(head);
+	    head = temp;
 	}
 	else {
-        number = NULL;
+        character = NULL;
 	}
 
-    return number;
+    return character;
 }
 
 int main()
 {
-    int choice, number;
+    int choice;
+    char character;
     do {
         printQueue();
         printf("Menu glowne stosu:\n");
@@ -84,9 +82,9 @@ int main()
                 break;
             case 2:
                 system("cls");
-                number = dequeue();
-                if(number!=NULL) {
-                    printf("Usunieta wartosc to: %d\n", number);
+                character = dequeue();
+                if(character!=NULL) {
+                    printf("Usuniety znak to: %c\n", character);
                 }
                 else {
                     printf("Stos jest pusty!\n");
