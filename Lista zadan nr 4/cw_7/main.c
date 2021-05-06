@@ -1,33 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct node{
-    int data;
-    int **right;
-}Node;
-
+typedef struct structure{
+	int data;
+	int **array;
+} Structure;
 
 int main()
 {
-    Node *structur1 = malloc(sizeof(Node));
-    Node *structur2 = malloc(sizeof(Node));
+    int **p2;
+    Structure **p1;
+    p2 = malloc(sizeof(int*)*3);
+    p2[0] = NULL;
+    p2[1] = malloc(sizeof(int)*4);
+    p2[2] = malloc(sizeof(int)*3);
 
-    int **p1, **p2;
-    int tab5[] = {5,6,7};
-    int tab4[] = {1,2,3,4};
-    int *tab3[] = {NULL,tab4,tab5};
-    int *tab2[] = {NULL,NULL};
-    int *tab1[] = {&structur1, NULL, &structur2};
+    for(int i=0; i<4; i++) {
+        p2[1][i]=i+1;
+    }
 
-    structur1->data = 7;
-    structur1->right = tab2;
-    structur2->data = 4;
-    structur2->right = tab3;
+    for(int j=0; j<3; j++) {
+        p2[1][j]=j+5;
+    }
 
-    printf("%d",structur2->right);
+    p1 = malloc(sizeof(Structure*)*3);
+    p1[0] = malloc(sizeof(Structure));
+    p1[2] = malloc(sizeof(Structure));
 
-    p1 = tab1;
-    p2 = tab3;
+    p1[0]->data = 7;
+    p1[0]->array = malloc(sizeof(int*)*2);
+    p1[0]->array[0] = NULL;
+    p1[0]->array[1] = NULL;
+    p1[1] = NULL;
+    p1[2]->data = 4;
+    p1[2]->array = p2;
 
-    return 0;
+	return 0;
 }
