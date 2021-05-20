@@ -1,14 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int index = 0;
+int position = 0;
 int size = 2;
 
 void printStack(int t[]) {
 
     printf("Zawartosc stosu:\n");
 
-    for(int i = index-1; i>=0; i--)
+    for(int i = position-1; i>=0; i--)
     {
         printf("%d\n", t[i]);
     }
@@ -20,27 +20,27 @@ void push(int t[]) {
     int new_value;
     printf("Podaj warosc wezla: ");
     scanf("%d", &new_value);
-    if(index==size) {
+    if(position==size) {
         t = realloc(t, 2*size * sizeof(int));
         size*=2;
     }
-    t[index] = new_value;
-    index++;
+    t[position] = new_value;
+    position++;
 }
 
 int pop(int *t) {
     int number;
 
-    if(index!=0)
+    if(position!=0)
 	{
-	    if(size/4>=index) {
+	    if(size/4>=position) {
             t = realloc(t, size/2 * sizeof(int));
             size/=2;
         }
 
-	    number = t[index-1];
-        t[index-1] = 0;
-        index--;
+	    number = t[position-1];
+        t[position-1] = 0;
+        position--;
 	}
 	else {
         number = NULL;
