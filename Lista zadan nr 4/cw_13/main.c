@@ -3,8 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX_WORDS 100
-
 typedef struct node {
     char *string;
     int value;
