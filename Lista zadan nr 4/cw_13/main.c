@@ -68,8 +68,6 @@ Node *new_node(char *s)
 
 void insert(char *word)
 {
-    int number = 1;
-
     if(p == NULL)
     {
         p = new_node(word);
