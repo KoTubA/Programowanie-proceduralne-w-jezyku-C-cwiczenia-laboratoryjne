@@ -37,7 +37,6 @@ void enqueue() {
         tail = temp;
     }
     else {
-        if(head->next==NULL) head->next = temp;
         tail->next=temp;
         tail=temp;
     }
